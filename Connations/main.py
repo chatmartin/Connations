@@ -12,7 +12,7 @@ def file_read():
     num_border_dict = {}
     country_list = []
 
-    with open('bb/country_data.csv', newline='') as csvfile:
+    with open('bb/country_data.csv', newline='', encoding='latin-1') as csvfile:
         info = csv.reader(csvfile, delimiter=',')
         next(info)
         for row in info:
@@ -760,3 +760,4 @@ app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True)
+
