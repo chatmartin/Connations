@@ -752,12 +752,11 @@ def create_app():
 
     return app
 
-def main():
-    app = create_app()
-    app.run(debug=True)
+app = create_app()
+
 
 
 
 
 if __name__ == '__main__':
-    main()
+    app.run(debug=True)
