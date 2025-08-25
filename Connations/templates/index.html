@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Connations Game</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <h1 class="title">
+            CONNATI
+            <img class = "letter-img"  src="https://pngimg.com/uploads/un/small/un_PNG9.png" alt = "0"></span>
+            NS
+        </h1>
+        <h3>A country connection game</h3>
+	<h4>Connect four groups of four countries!</h4>
+        <div id="banners"></div>
+        <div id="grid" class="grid"></div>
+        <button id="new">New Board</button>
+        <button id="shuffle">Shuffle</button>
+        <button id="deselect">Deselect All</button>
+        <button id="submit">Submit</button>
+        <p id="message"></p>
+	<button id="share" style="display:none;">Share Results</button>
+
+	<button id="infoButton" class="info-btn">?</button>
+
+        <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+
+            <div class="tabs">
+                <button class="tab-button active" data-tab="how">How to Play</button>
+                <button class="tab-button" data-tab="categories">Categories</button>
+                <button class="tab-button" data-tab="inclusion">Included Countries</button>
+                <button class="tab-button" data-tab="bordersx">Borders X Country</button>
+                <button class="tab-button" data-tab="bordersn">Borders n Countries</button>
+                <button class="tab-button" data-tab="region">Region</button>
+                <button class="tab-button" data-tab="flag">Flag Color</button>
+                <button class="tab-button" data-tab="star">Stars on Flags</button>
+                <button class="tab-button" data-tab="coat">Coat of Arms</button>
+                <button class="tab-button" data-tab="language">Language</button>
+                <button class="tab-button" data-tab="religion">Religion</button>
+                <button class="tab-button" data-tab="island">Island</button>
+                <button class="tab-button" data-tab="landlocked">Landlocked</button>
+                <button class="tab-button" data-tab="time">Time Zones</button>
+                <button class="tab-button" data-tab="capital">Capital Population</button>
+                <button class="tab-button" data-tab="gdp">GDP</button>
+                <button class="tab-button" data-tab="population">Population</button>
+                <button class="tab-button" data-tab="cuphost">World Cup</button>
+                <button class="tab-button" data-tab="olyhost">Olympics</button>
+                <button class="tab-button" data-tab="econ">Economic Blocs</button>
+                <button class="tab-button" data-tab="communism">Communist States</button>
+                <button class="tab-button" data-tab="monarchy">Monarchies</button>
+                <button class="tab-button" data-tab="left">Left Driving</button>
+            </div>
+
+            <div class="tab-content active" id="how">
+                <h2>How to Play</h2>
+                <p>Select 4 tiles that belong together, then hit 'Submit'. If you are wrong, you receive a strike.  Try to find all groups before receiving four strikes.</p>
+                <p>There will never be any words from one group that belong to another group. Watch out for other groups of four words outside the intended four groups that could work together. Try to think about how other countries will fit with each other.</p>
+                <p>Note: this game was made in August, 2025. Thus, it will contain inaccuracies in the future.</p>
+            </div>
+
+            <div class="tab-content" id="categories">
+                <h2>Categories</h2>
+                <p>In this game, each group is color-coded.</p>
+                <p>🟦 Group 1</p>
+                <p>🟩 Group 2</p>
+                <p>🟨 Group 3</p>
+                <p>🟥 Group 4</p>
+                <p></p>
+                <p>Generally, Group 1 and Group 3 focus on geography, Group 2 focuses on culture, and Group 4 focuses on trivia, usually involving historical, political, or economic facts</p>
+                <p></p>
+                <p>Group 1 topics include countries sharing a border, countries bordering the same number of countries, and countries within the same region.</p>
+                <p>Group 2 topics include flags sharing two or three colors, flags having a star, flags having a coat of arms, countries sharing official languages, and countries sharing a majority religion, </p>
+                <p>Group 3 topics include countries being island nations, being landlocked, having multiple time zones, having capitals which are not the most populated city, sharing a border with a certain country, or being within the same region.</p>
+                <p>Group 4 topics include countries having a GDP over $1 Trillion, having a population over 100 million people, having hosted the World Cup or Olympics, being a member of the European Union, currently or historically being under a communist state, being a member of the Commonwealth of Nations, being a member or partner of BRICS, being a monarchy, or driving on the left side of the road.</p>
+                <p></p>
+                <p>Click on the other tabs for more information on these categories.</p>
+            </div>
+
+            <div class="tab-content" id="inclusion">
+                <h2>Which countries are included?</h2>
+                <p>The included countries are taken from 
+                    <a href="https://simple.wikipedia.org/wiki/List_of_countries" target="_blank">Wikipedia's list of independent countries.</a> 
+                    This means dependent countries aren't counted as independent countries but instead as part of countries they are considered 'dependent' on (for the most part).</p>
+                <p>A note about Kosovo and Western Sahara: Both Kosovo and Western Sahara are disputed regions which are claimed by Serbia and Morocco, respectively. Since they are not included in Wikipedia's list (along with Taiwan), I chose not to include them as independent nations. However, because they are disputed territories, they are considered somewhat of a 'no man's land' in terms of bordering other countries. This means no country is considered to border Western Sahara or Kosovo. Furthermore, Albania and Serbia are not considered to border each other and Mauritania and Morocoo are considered to not border each other.</p>
+            </div>
+
+            <div class="tab-content" id="bordersx">
+                <h2>Borders X Country</h2>
+                <p>This category involves countries sharing a land border with a certain country (denoted as 'X' in the heading).</p>
+                <p>For example: France, Italy, Germany, and Liechtenstein all border Switzerland. If no other country in the grid borders Switzerland (e.g., Austria), this would be a possible connection.</p>
+                <p>Martime borders are not included, but overseas dependencies are included. For example, France borders Brazil through French Guiana in South America.</p>
+            </div>
+            <div class="tab-content" id="bordersn">
+                <h2>Borders n Countries</h2>
+                <p>This category involves the number (n) of countries a group of 4 countries border. As with the last category, this involves land borders (including overseas dependencies) but not maritime borders.</p>
+                <p>For example: Azerbaijan, Switzerland, Belarus, and Syria each border 5 countries. If no other county in the grid borders 5 countries (e.g., Colombia), this would be a possible connection.</p>
+            </div>
+            <div class="tab-content" id="region">
+                <h2>Region</h2>
+                <p>This category involves countries being within the same region. This is based on 
+                    <a href="https://en.wikipedia.org/wiki/United_Nations_geoscheme" target="_blank">the United Nations geoscheme.</a>
+                </p>
+                <p>For example: Vietnam, Myanmar, Indonesia, and Philippines are all in the Southeastern Asia region. If no other country in the grid is in this region (e.g., Singapore), this would be a possible connection.</p>
+            </div>
+
+            <div class="tab-content" id="flag">
+                <h2>Flag Colors</h2>
+                <p>This category involves the colors shared between the flags of countries. This could either be two shared colors or three shared colors.</p>
+                <p>Valid colors include: red, white, blue, black, green, yellow, orange, pink, brown, and purple. While gray is considered a color on the flags, it is not included as a color for the game for gameplay reasons.</p>
+                <p>For example: Poland, Japan, France, and Italy all have red and white on their flags. If no other countries on the grid have both red and white on their flags (e.g., Russia but not Belgium, which lacks white), this would be a possible connection.</p>
+                <p>Note: be careful about countries with a coat of arms or some other design, as even minor amounts of one color on a flag is still counted as a color (e.g. pink on Spain's flag).</p>
+            </div>
+            <div class="tab-content" id="star">
+                <h2>Stars on Flags</h2>
+                <p>This category includes countries who either have a star or sun on their flag's design.</p>
+                <p>More information can be found 
+                    <a href="https://en.wikipedia.org/wiki/List_of_national_flags_by_design" target="_blank">here.</a>
+                </p>
+                <p>For example: Argentina, Ghana, Japan, and Jordan all have a star or sun on their flag. If no other countries on the grid have a star or sun on their flag (e.g. Uruguay), then this would be a possible connection.</p>
+                <p>Some countries symbolize the sun on their flag with a circle, while other do the same to symbolize the moon. Those symbolizing the sun are included, while those symbolizing the moon are not.</p>
+                <p>Note: Some countries have a small star on their coat of arms. No matter how small, these stars are included.</p>
+            </div>
+            <div class="tab-content" id="coat">
+                <h2>Flags with a Coat of Arms</h2>
+                <p>This category includes countries with a 
+                    <a href="https://en.wikipedia.org/wiki/Category:Flags_with_coats_of_arms" target="_blank">coat of arms</a>
+                     on their flag's design.</p>
+                <p>For example: Spain, Haiti, Egypt, and Ecuador all have a coat of arms on their flag. If no other countries on the grid have a coat of arms on their flag (e.g., Fiji), then this would be a possible connection.</p>
+                <p>Note: Some countries have flag designs with and without a coat of arms, such as Costa Rica and Bolivia. These countries are not considered to have a coat of arms on their flag for this game.</p>
+            </div>
+            <div class="tab-content" id="language">
+                <h2>Official or De Facto Official Language</h2>
+                <p>This category connects countries that share an official language.</p>
+                <p>For example: France, Belgium, Democratic Republic of the Congo, and Cameroon have French as an official language. If no other countries on the grid have French as an official language (e.g. Canada), then this would be a possible connection.</p>
+                <p>Note: Some countries, such as Australia, don't have an official language. For this game, the de facto official language will be considered the official language.</p>
+            </div>
+            <div class="tab-content" id="religion">
+                <h2>Majority Religion</h2>
+                <p>This category connects countries that share their majority religion. The majority religion is considered the religion that is practiced by at least 50% of a country's population.</p>
+                <p>For example: The majority religion in Indonesia, Saudi Arabia, Iran, and Algeria is Islam. If no other nations on the grid have Islam as their majority religion (e.g., Somalia), then this would be a possible connection.</p>
+                <p>Note: Some countries do not have a majority relgion due to being a diverse mix of religions. In this case, they are marked as "No Majority" and can still be connected for this category. The same goes for countries with a majority population that doesn't subscribe to a religion (counted as 'Non-Religious').</p>
+            </div>
+
+            <div class="tab-content" id="island">
+                <h2>Island Nations</h2>
+                <p>This category includes countries that are composed of one or more islands and do not have a mainland continental territory.</p>
+                <p>For example, New Zealand, Jamaica, Fiji, and Madagascar are all considered to be island nations. If no other nations on the grid are island nations (e.g., Japan), then this would be a possible connection.</p>
+                <p>Note: Oceania is not considered to have a mainland territory. All other continents with countries are, however.</p>
+                <p><a href="https://en.wikipedia.org/wiki/List_of_island_countries" target="_blank">You can find more information here.</a></p>
+            </div>
+            <div class="tab-content" id="landlocked">
+                <h2>Landlocked Countries</h2>
+                <p>This category includes landlocked countries, that is, countries without a coastline.</p>
+                <p>For example: Azerbaijan, Uzbekistan, Hungary, and Bolivia are all considered to be landlocked. If no other countries on the grid are landlocked (e.g., Ethiopia), then this would be a possible connection.</p>
+                <p>Note: Coastlines do not include lakes, but do include seas. The Caspian sea is not considered a sea.</p>
+                <p><a href="https://en.wikipedia.org/wiki/Landlocked_country#List_of_landlocked_countries_and_landlocked_de_facto_states" target="_blank">You can find more information here.</a></p>
+            </div>
+            <div class="tab-content" id="time">
+                <h2>Multiple Time Zones</h2>
+                <p>This category includes countries with multiple time zones, including dependencies.</p>
+                <p>For example: United States of America, Mexico, Russia, and France are all considered to have multiple time zones. If no other countries on the grid have multiple time zones (e.g., South Africa), then this would be a possible connection.</p>
+                <p>Note: A country changing its time due to daylight savings does NOT count as having multiple time zones.</p>
+                <p>Note 2: Two countries have some of their territories under foreign occupation. The non-occupied portion of the country follows one timezone, while the occupied portion follows another. For this game, these countries will be considered to have multiple time zones. Try to see if you can figure out which ones they are!</p>
+            </div>
+            <div class="tab-content" id="capital">
+                <h2>Capital is not the Most Populated City</h2>
+                <p>This category includes countries whose capital is not their most populated city.</p>
+                <p>For example: Australia, Switzerland, South Africa, and Brazil all have capitals which are not their most populated city. If no other countries on the grid have their capital which is not their most populated city (e.g., United States of America), then this would be a possible connection.</p>
+                <p>If a country has no capitals, their de facto capital is used.</p>
+                <p>Some countries have multiple capitals. To be included, none of their capitals can be their most populated city.</p>
+            </div>
+
+            <div class="tab-content" id="gdp">
+                <h2>GDP is over $1 Trillion</h2>
+                <p>This category includes countries whose GDP totals over $100 Trillion. The source for this is <a href="https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)" target="_blank">here.</a></p>
+                <p>For example: China, Russia, Spain, and South Korea all have a GDP over $1 Trillion. If no other countries on the grid have a GDP over $1 Trillion (e.g., Saudi Arabia), then this would be a possible connection.</p>
+            </div>
+            <div class="tab-content" id="population">
+                <h2>Population is over 100 Million People</h2>
+                <p>This category includes countries whose population is over 100 million people.</p>
+                <p>For example: India, Nigeria, Brazil, and Pakistan all have a population over 100 million people. If no other countries on the grid have a population over 100 million people (e.g., Indonesia), then this would be a possible connection.</p>
+                <p><a href="https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population" target="_blank">Source</a></p>
+            </div>
+            <div class="tab-content" id="cuphost">
+                <h2>World Cup Host</h2>
+                <p>This category includes countries that have hosted the World Cup.</p>
+                <p>For example: Brazil, France, Russia, and Italy have all hosted the World Cup. If no other countries on the grid have hosted the World Cup (e.g., Argentina), then this would be a possible connection.</p>
+            </div>
+            <div class="tab-content" id="olyhost">
+                <h2>Has Hosted the Olympics</h2>
+                <p>This category includes countries that have hosted the Olympics.</p>
+                <p>For example: Switzerland, Norway, United Kingdom, and Greece have all hosted the Olympics. If no other countries on the grid have hosted the Olympics (e.g. China), then this would be a possible connection.</p>
+                <p>Note: Some Olympics were hosted in a city that was once part of a union of countries that today no longer exists. In these cases, the Olympics host is considered to be the country with the host city.</p>
+            </div>
+            <div class="tab-content" id="econ">
+                <h2>Member of the EU, Commonwealth, or BRICS</h2>
+                <p>These are 3 separate categories, but for simplicity will be included under one tab.</p>
+                <p>The first category corresponds to current members of the European Union. The second corresponds to current members of the Commonwealth of Nations. The final corresponds to current members of partners of BRICS.</p>
+            </div>
+            <div class="tab-content" id="communism">
+                <h2>Former or Current Communist States</h2>
+                <p>This category includes countries that are or were under the rule of a 
+                    <a href="https://en.wikipedia.org/wiki/List_of_communist_states" target="_blank">communist state.</a></p>
+                <p>For example: Russia, Serbia, China, and Cuba are all current or former communist states. If no other country in the grid is a current or former communist state (e.g. Cambodia), then this would be a possible connection.</p>
+                <p>Some countries were part of a union of communist states that have since collapsed. Every country in this union is considered to be a former communist state.</p>
+            </div>
+            <div class="tab-content" id="monarchy">
+                <h2>Monarchies</h2>
+                <p>This category includes countries under the rule of a monarch. This means their head of state is a monarch, however limited their power.</p>
+                <p>For example: United Arab Emirates, Morocco, Jamaica, and Japan are all monarchies. If no other countries on the grid are monarchies (e.g. United Kingdom), then this would be a possible connection.</p>
+                <p><a href="https://en.wikipedia.org/wiki/Monarchy#Current_monarchies" target="_blank">Source</a></p>
+            </div>
+            <div class="tab-content" id="left">
+                <h2>Left Side Driving</h2>
+                <p>This category includes countries that drive on the left side of the road.</p>
+                <p>For example: United Kingdom, Japan, Malaysia, and Botswana all drive on the left side of the road. If no other countries on the grid drive on the left side of the road (e.g., Guayna), then this would be a possible connection.</p>
+            </div>        </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+    </body>
+</html>
