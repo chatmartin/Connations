@@ -41,5 +41,5 @@ python main.py
 
 ## Credits
 - Inspired by New York Times Connections game and Teuteuf Games Geogrid
-- [https://pngimg.com/uploads/un/small/un_PNG9.png](UN logo image)
+- [UN logo image](https://pngimg.com/uploads/un/small/un_PNG9.png)
 - Much of the data was taken from Wikipedia or my knowledge
