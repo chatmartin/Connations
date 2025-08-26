@@ -14,15 +14,15 @@ python -m venv venv
 venv\Scripts\activate #For Windows users
 source venv/bin/activate #For Mac/Linux users
 ```
-3. Install dependencies
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-4. Start the Flask server
+4. Start the Flask server:
 ```bash
 python main.py
 ```
-5. Go to http://127.0.0.1:5000 on your browser (or click the link in python's output)
+5. Go to http://127.0.0.1:5000 on your browser (or click the link in python's output).
 
 ## Features
 - Select a group of four tiles to form a connection
